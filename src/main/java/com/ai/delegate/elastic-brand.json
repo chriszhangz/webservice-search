@@ -1,0 +1,29 @@
+{  
+"query":{
+"filtered": {
+   "query":{  
+"match_all": {}
+      }
+      FILTERXXX
+      }
+   },
+   "sort": [{ "has_number":   { "order": "desc" }},{ "SORTXXX": { "order": "ORDERXXX" }}],
+   "size":800,
+   "min_score":MINSCOREXXX,
+   "highlight":{  
+      "pre_tags":[  
+         "<mark>",
+         "<mark>"
+      ],
+      "post_tags":[  
+         "</mark>",
+         "</mark>"
+      ],
+      "fields":{  
+         "goods_name":{ 
+         },
+         "goods_ename":{ 
+         }         
+      }
+   }
+}

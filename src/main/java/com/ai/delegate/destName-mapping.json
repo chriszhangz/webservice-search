@@ -1,0 +1,94 @@
+{
+"settings": {
+    "index": {
+      "analysis": {
+        "analyzer": {
+          "jt_cn": {
+            "type": "custom",
+            "use_smart": "false",
+            "tokenizer": "ik_max_word",
+            "filter": ["jt_tfr","jt_sfr"]
+          },
+          "ik_smart": {
+            "type": "ik",
+            "use_smart": "true"
+          },
+          "ik_max_word": {
+            "type": "ik",
+            "use_smart": "false"
+          }
+        },
+        "filter": {
+          "jt_tfr": {
+            "type": "stop",
+            "stopwords": [" "]
+          },
+          "jt_sfr": {
+            "type": "synonym",
+            "synonyms_path": "analysis/synonym.txt"
+          }
+        }
+      }
+    }
+  },
+"mappings": {
+"dest_info": {
+
+            "properties": {
+                "desId": {
+                    "type": "integer"
+                },             
+                "desName": {
+                    "type": "text",
+                    "analyzer": "jt_cn",
+                    "search_analyzer": "jt_cn",
+          			"copy_to": "desName_full"
+                },
+                "desName_zh": {
+                    "type": "text",
+                    "analyzer": "jt_cn",
+                    "search_analyzer": "jt_cn",
+          			"copy_to": "desName_full"
+                },
+                "desName_full": {
+                    "type": "text",
+                    "analyzer": "jt_cn",
+                    "search_analyzer": "jt_cn"
+                },                
+                "display": {
+                    "type": "integer"
+                },
+                "countryId": {
+                    "type": "integer"
+                },
+                "state": {
+                    "type": "keyword"
+                },
+                "state_zh": {
+                    "type": "keyword"
+                },
+                "city": {
+                    "type": "text"
+                },
+                "city_zh": {
+                    "type": "text"
+                },                
+                "priority": {
+                    "type": "integer"
+                },
+                "click_count": {
+                    "type": "integer"
+                },
+                "created_at": {
+                    "type": "date"
+                },
+                "updated_at": {
+                    "type": "date"
+                },                 
+                "score": {
+                    "type": "float"
+                }                
+            }
+        }
+        }
+}        

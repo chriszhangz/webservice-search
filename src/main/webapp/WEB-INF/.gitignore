@@ -1,0 +1,5 @@
+
+/config.properties
+/dataSource.xml
+/applicationContext.xml
+/jboss-web.xml

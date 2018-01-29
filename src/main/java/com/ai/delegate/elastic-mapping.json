@@ -1,0 +1,198 @@
+{
+"goods_info": {
+                 "_all": {
+                "term_vector": "no",
+                "index": "not_analyzed",
+                "store": "false"
+            },
+            "properties": {
+                "goods_id": {
+                    "type": "integer",
+                    "store": "no",
+                    "include_in_all": "true"
+                },
+                "item_number": {
+                    "type": "string",
+                    "store": "no",
+                    "include_in_all": "true"
+                },                
+                "vendor_id": {
+                    "type": "integer",
+                    "store": "no",
+                    "include_in_all": "true"
+                },                 
+                "cat_id": {
+                    "type": "integer",
+                    "store": "no",
+                    "include_in_all": "true"
+                }, 
+                "scat_id": {
+                    "type": "integer",
+                    "store": "no",
+                    "include_in_all": "true"
+                },
+                "fcat_id": {
+                    "type": "integer",
+                    "store": "no",
+                    "include_in_all": "true"
+                },
+                "cat_name": {
+                    "type": "string",
+                    "store": "no",
+                    "include_in_all": "true"
+                },
+                "cat_ename": {
+                    "type": "string",
+                    "store": "no",
+                    "include_in_all": "true"
+                },
+                "brand_id": {
+                    "type": "integer",
+                    "store": "no",
+                    "include_in_all": "true"
+                }, 
+                "brand_name": {
+                    "type": "string",
+                    "store": "no",
+                	"index": "not_analyzed",
+                    "include_in_all": "true"
+                },
+                "brand_ename": {
+                    "type": "string",
+                    "store": "no",
+                	"index": "not_analyzed",
+                    "include_in_all": "true"
+                },                
+                "goods_name": {
+                    "type": "string",
+                    "store": "no",
+                	"index": "analyzed",
+                    "analyzer": "ik_max_word",
+                    "search_analyzer": "ik_max_word",
+                    "include_in_all": "false",
+                    "boost": 4
+                },
+                "goods_ename": {
+                    "type": "string",
+                    "store": "no",
+                	"index": "analyzed",
+                    "analyzer": "ik_max_word",
+                    "search_analyzer": "ik_max_word",
+                    "include_in_all": "false",
+                    "boost": 4
+                },
+                "click_count": {
+                    "type": "integer",
+                    "store": "no",
+                	"index": "not_analyzed",
+                    "include_in_all": "true"
+                },
+                "first_add_time": {
+                    "type": "integer",
+                    "store": "no",
+                    "include_in_all": "true"
+                },
+                "promote_start_date": {
+                    "type": "integer",
+                    "store": "no",
+                    "include_in_all": "true"
+                },
+                "promote_end_date": {
+                    "type": "integer",
+                    "store": "no",
+                    "include_in_all": "true"
+                },                                
+                "is_delete": {
+                    "type": "integer",
+                    "store": "no",
+                    "include_in_all": "true"
+                },
+                "is_on_sale": {
+                    "type": "integer",
+                    "store": "no",
+                    "include_in_all": "true"
+                },
+                "is_promote": {
+                    "type": "integer",
+                    "store": "no",
+                    "include_in_all": "true"
+                },
+                "promote_price": {
+                    "type": "float",
+                    "store": "no",
+                    "include_in_all": "true"
+                },
+                "shop_price": {
+                    "type": "float",
+                    "store": "no",
+                	"index": "not_analyzed",
+                    "include_in_all": "true"
+                },
+                "has_number": {
+                    "type": "integer",
+                    "store": "no",
+                    "include_in_all": "true"
+                },
+                "is_book": {
+                    "type": "integer",
+                    "store": "no",
+                    "include_in_all": "true"
+                },                
+                "goods_number": {
+                    "type": "integer",
+                    "store": "no",
+                    "include_in_all": "true"
+                },
+                "image": {
+                    "type": "string",
+                    "store": "no",
+                    "include_in_all": "true"
+                },
+                "parent_id": {
+                    "type": "integer",
+                    "store": "no",
+                    "include_in_all": "true"
+                },
+                "alphabetic_index": {
+                    "type": "string",
+                    "store": "no",
+                	"index": "not_analyzed",
+                    "include_in_all": "true"
+                },
+                "upc_code": {
+                    "type": "string",
+                    "store": "no",
+                	"index": "not_analyzed",
+                    "include_in_all": "true"
+                },
+                "tag_id": {
+                    "type": "integer",
+                    "store": "no",
+                    "include_in_all": "true"
+                },
+                "tag": {
+                    "type": "string",
+                    "store": "no",
+                	"index": "not_analyzed",
+                    "include_in_all": "true"
+                },
+                "tag_eng": {
+                    "type": "string",
+                    "store": "no",
+                	"index": "not_analyzed",
+                    "include_in_all": "true"
+                }, 
+                "status": {
+                    "type": "string",
+                    "store": "no",
+                	"index": "not_analyzed",
+                    "include_in_all": "true"
+                },                 
+                "score": {
+                    "type": "float",
+                    "store": "no",
+                    "include_in_all": "true"
+                }                
+            }
+        }
+}        

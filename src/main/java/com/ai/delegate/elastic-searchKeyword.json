@@ -1,0 +1,33 @@
+{  
+"query":{
+"filtered": {
+   "query":{  
+      "match":{  
+         "key_word":"KEYWORDXXX"
+      }
+      }
+      
+      }
+   },
+   "sort": {
+   	 "activity_point": { "order": "desc" },
+   	 "click_count": { "order": "desc" },
+   	"_score": { "order": "desc" }},
+   "size":10,
+   "min_score":2.0,
+   "highlight":{  
+      "pre_tags":[  
+         "<strong>",
+         "<strong>"
+      ],
+      "post_tags":[  
+         "</strong>",
+         "</strong>"
+      ],
+      "fields":{  
+         "key_word":{  
+
+         }
+      }
+   }
+}

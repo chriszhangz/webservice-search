@@ -1,0 +1,27 @@
+{  
+"query":{
+"multi_match" : {
+         "query":"MATCHXXX",
+"fields": [  "name^2","name_zh" ]
+  }
+   },
+   "sort": {
+   	"_score": { "order": "desc" }
+   },
+   "size":6,
+   "highlight":{  
+      "pre_tags":[  
+         "<strong>",
+         "<strong>"
+      ],
+      "post_tags":[  
+         "</strong>",
+         "</strong>"
+      ],
+      "fields":{  
+         "name":{  
+         },
+         "name_zh": {}         
+      }
+   }
+}

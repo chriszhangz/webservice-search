@@ -1,0 +1,46 @@
+{  
+"query":{
+"function_score": {
+  "query": {
+"multi_match" : {
+         "query":"MATCHXXX",
+"fields": [  "city^3","desName^2","desName_zh",
+        "desName_zh.pinyin" ]
+  }
+   },
+    "boost_mode":"sum",
+"functions": [      {
+      "field_value_factor": {
+        "field": "priority",
+        "factor": 1.1,
+        "modifier": "log2p",
+        "missing": 1
+      }},
+      {"script_score": {
+        "script": "return doc['countryId'].value == 181 ? 1.4 : 1.0"
+      }}]
+    }
+  },
+  "post_filter": { 
+    "term": { "display": 1 }
+  },     
+   "sort": {
+   	"_score": { "order": "desc" }
+   },
+   "size":6,
+   "highlight":{  
+      "pre_tags":[  
+         "<strong>",
+         "<strong>"
+      ],
+      "post_tags":[  
+         "</strong>",
+         "</strong>"
+      ],
+      "fields":{  
+         "desName":{  
+         },
+         "desName_zh": {}         
+      }
+   }
+}

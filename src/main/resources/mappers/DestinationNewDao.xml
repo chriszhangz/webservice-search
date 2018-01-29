@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ai.dao.DestinationNewDao">  
+
+<resultMap id="DestinationNewResultMap" type="com.ai.entity.Destination_new">
+    <id column="desId" jdbcType="INTEGER" property="desId" />
+    <result column="regionId" jdbcType="INTEGER" property="regionId" />
+    <result column="countryId" jdbcType="INTEGER" property="countryId" />
+     <result column="desName" jdbcType="VARCHAR" property="desName" />
+     <result column="state" jdbcType="VARCHAR" property="state" />
+     <result column="city" jdbcType="VARCHAR" property="city" />
+     <result column="desName_zh" jdbcType="VARCHAR" property="desName_zh" />
+      <result column="state_zh" jdbcType="VARCHAR" property="state_zh" />
+      <result column="city_zh" jdbcType="VARCHAR" property="city_zh" />
+      <result column="originalId" jdbcType="VARCHAR" property="originalId" />
+      <result column="originalDest" jdbcType="VARCHAR" property="originalDest" />
+      <result column="originalState" jdbcType="VARCHAR" property="originalState" />
+      <result column="originalRegion" jdbcType="VARCHAR" property="originalRegion" />
+      <result column="display" jdbcType="INTEGER" property="display" />
+      <result column="zoneCode" jdbcType="INTEGER" property="zoneCode" />
+      <result column="priority" jdbcType="INTEGER" property="priority" />
+      <result column="created_at" jdbcType="DATE" property="createdAt" />
+      <result column="updated_at" jdbcType="DATE" property="updatedAt" />
+</resultMap>
+<update id="updateRegionIdBydesId" parameterType="java.util.List">  
+<foreach collection="desUpdateList" item="item" index="index" separator=";" >  
+        update destination_new set 
+	regionId = #{item.regionId}
+        where desId = #{item.desId}
+  </foreach>      
+</update> 
+<select id="selectDestNum" resultType="int">
+    select count(*)
+    from destination as d 
+</select>
+<select id="selectAllDestinations" resultMap="DestinationNewResultMap">
+    select desId,countryId,desName,state,REPLACE(city,' (and vicinity)','')city,display,priority,desName_zh,state_zh,city_zh,originalId,originalDest,originalState,originalRegion,zoneCode,created_at,updated_at
+    from destination as d limit #{start},#{leng}
+</select>
+<select id="selectDestinationByDesId" parameterType="map" resultMap="DestinationNewResultMap">
+    select *
+    from destination as d where d.desId=#{desId} 
+</select>
+
+<select id="selectIdByDesName" parameterType="map" resultType="int">
+    select desId
+    from destination_new as d where d.desName=#{desName} 
+</select>
+
+<select id="countByCountryCity" parameterType="map" resultType="int">
+    select count(*) 
+    from destination_new as d where d.originalRegion=#{originalRegion} and d.originalDest=#{originalDest}
+</select>
+
+
+<select id="countByCountryStateCity" parameterType="map"
+	resultType="int">
+	select count(*)
+	from destination_new as d where 
+	d.originalRegion=#{originalRegion}
+	<!--and d.city like CONCAT('%',#{originalDest},'%') -->
+	and d.city =#{originalDest}
+    <if test="originalState != null and originalState != '' ">  
+    and d.state = #{originalState}
+    </if>
+</select>
+
+<select id="selectIdByCountryStateCity" parameterType="map"
+	resultType="Integer">
+	select IFNULL(desId,0) as desId
+	from destination_new as d where 
+	d.originalRegion=#{originalRegion}
+	<!-- and d.city like CONCAT('%',#{originalDest},'%') -->
+	and d.city =#{originalDest}
+    <if test="originalState != null and originalState != '' "> 
+    and d.state = #{originalState}
+    </if>
+    limit 1
+</select>
+
+<select id="selectDestinationByDesPId" parameterType="map"
+	resultType="com.ai.entity.Destination_new">
+	SELECT
+	*
+	FROM
+	destination_new dn
+	LEFT JOIN map_destination_new mpn ON dn.desId = mpn.destinationId
+	WHERE
+	mpn.destinationPId = #{destinationPId}
+	AND mpn.provider = #{provider}
+	AND mpn.zoneCode = #{zoneCode}
+</select>
+
+<insert id="insert" parameterType="java.util.List">
+    insert into destination_new (desId,countryId,desName,state,city,desName_zh,state_zh,city_zh,originalId,originalDest,originalState,originalRegion,zoneCode,created_at,updated_at)
+    values
+    <foreach collection="destList" item="item" index="index" separator="," >  
+    (#{item.desId,jdbcType=INTEGER},#{item.countryId,jdbcType=INTEGER},trim(#{item.desName,jdbcType=VARCHAR}),
+    trim(#{item.state,jdbcType=INTEGER}),
+    trim(#{item.city,jdbcType=VARCHAR}),
+    trim(#{item.desNameZh,jdbcType=VARCHAR}),
+    trim(#{item.stateZh,jdbcType=VARCHAR}),
+    trim(#{item.cityZh,jdbcType=VARCHAR}),
+    trim(#{item.originalId,jdbcType=VARCHAR}),
+    trim(#{item.originalDest,jdbcType=VARCHAR}),
+    trim(#{item.originalState,jdbcType=VARCHAR}),
+    trim(#{item.originalRegion,jdbcType=VARCHAR}),
+    #{item.zoneCode,jdbcType=INTEGER},
+    #{item.createdAt,jdbcType=DATE},
+    #{item.updatedAt,jdbcType=DATE})
+    </foreach> 
+</insert>
+
+<insert id="insertSingle"  parameterType="com.ai.entity.Destination_new" useGeneratedKeys="true" keyProperty="desId">
+    insert into destination_new (desId,countryId,desName,state,city,desName_zh,state_zh,city_zh,originalId,originalDest,originalState,originalRegion,zoneCode,created_at,updated_at)
+    values
+    (#{desId,jdbcType=INTEGER},#{countryId,jdbcType=INTEGER},trim(#{desName,jdbcType=VARCHAR}),
+    trim(#{state,jdbcType=INTEGER}),
+    trim(#{city,jdbcType=VARCHAR}),
+    trim(#{desNameZh,jdbcType=VARCHAR}),
+    trim(#{stateZh,jdbcType=VARCHAR}),
+    trim(#{cityZh,jdbcType=VARCHAR}),
+    trim(#{originalId,jdbcType=VARCHAR}),
+    trim(#{originalDest,jdbcType=VARCHAR}),
+    trim(#{originalState,jdbcType=VARCHAR}),
+    trim(#{originalRegion,jdbcType=VARCHAR}),
+    #{zoneCode,jdbcType=INTEGER},
+    #{createdAt,jdbcType=DATE},
+    #{updatedAt,jdbcType=DATE})
+	ON DUPLICATE KEY UPDATE
+	countryId = VALUES(countryId),
+	desName = VALUES(desName),
+	state = VALUES(state),
+	city = VALUES(city),
+	desName_zh = VALUES(desName_zh),
+	state_zh = VALUES(state_zh),
+	city_zh = VALUES(city_zh),
+	originalDest = VALUES(originalDest),
+	originalState = VALUES(originalState),
+	originalRegion = VALUES(originalRegion),
+	zoneCode = VALUES(zoneCode),
+	updated_at = VALUES(updated_at)
+
+</insert>
+
+</mapper>

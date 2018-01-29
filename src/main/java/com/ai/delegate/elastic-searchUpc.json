@@ -1,0 +1,81 @@
+{  
+"query":{
+
+"filtered": {
+   "query":{  
+    "bool": {
+    "should": [
+      {"match":{  
+         "upc_code":"MATCHXXX"
+      }}      
+      ]
+      }
+      }
+      FILTERXXX
+      }
+     
+   },
+   "sort": [{ "has_number":   { "order": "desc" }},{ "SORTXXX": { "order": "ORDERXXX" }}],
+   "size":800,
+   "min_score":MINSCOREXXX,
+   "aggs":{  
+          "fcat_ids":{  
+                     "terms":{  
+                        "field":"fcat_id",
+                        "order" : { "_term" : "asc" },
+                        "size":"200"
+                     },
+                              "aggs":{  
+            "scat_ids":{  
+               "terms":{  
+                  "field":"scat_id",
+                  "size":"200"
+               },         
+               "aggs":{  
+            "cat_ids":{  
+               "terms":{  
+                  "field":"cat_id",
+                  "size":"200"
+               }
+                  }
+               }
+            }
+                              }
+                  },  
+      "alphabetic":{  
+         "terms":{  
+            "field":"alphabetic_index",
+            "order": [
+          {
+            "_term": "asc"
+          }
+        ], 
+            "size":"100"
+         },
+         "aggs":{  
+            "brandids":{  
+               "terms":{  
+                  "field":"brand_id",
+                  "size":"200"
+               },
+               "aggs":{  
+                  "brandnames":{  
+                     "terms":{  
+                        "field":"brand_name",
+                        "size":"200"
+                     },                  
+               "aggs":{  
+                  "brandenames":{  
+                     "terms":{  
+                        "field":"brand_ename",
+                        "size":"200"
+                     }
+                  }
+               }
+                  }
+               }
+            }
+         }
+      }
+   }
+}

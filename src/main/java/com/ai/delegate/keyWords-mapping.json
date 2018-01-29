@@ -1,0 +1,30 @@
+{
+"goods_name": {
+                 "_all": {
+                "term_vector": "no",
+                "index": "no",
+                "store": "false"
+            },
+            "properties": {
+                "key_word": {
+                    "type": "string",
+                    "store": "no",
+          "analyzer": "autocomplete",
+          "search_analyzer": "autocomplete_search",
+                    "include_in_all": "false"
+                },
+                "click_count": {
+                    "type": "integer",
+                    "store": "no",
+                	"index": "not_analyzed",
+                    "include_in_all": "true"
+                }, 
+                "activity_point": {
+                    "type": "integer",
+                    "store": "no",
+                	"index": "not_analyzed",
+                    "include_in_all": "true"
+                }            
+            }
+        }
+}        

@@ -1,0 +1,16 @@
+{
+    "query": {
+        "match_all": {}
+    },
+    "size":10,
+    "sort" : {
+     "_script" : {
+            "type" : "number",
+            "script" : {
+                "inline": "doc['click_count'].value + doc['activity_point'].value"
+            },
+            "order" : "desc"
+        }
+        },
+     "_source": [ "key_word"]
+}

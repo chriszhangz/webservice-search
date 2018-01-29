@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ai.dao.GoodsDao">
+	<resultMap id="GoodsOfCatItemsMap" type="com.ai.entity.GoodsOfCatItems">
+    <result column="goods_id" jdbcType="INTEGER" property="goods_id" />
+    <result column="goods_name" jdbcType="VARCHAR" property="goods_name" />
+    <result column="goods_ename" jdbcType="VARCHAR" property="goods_ename" />
+    <result column="shop_price" jdbcType="DECIMAL" property="shop_price" />
+    <result column="promote_price" jdbcType="DECIMAL" property="promote_price" />  
+    <result column="is_promote" jdbcType="INTEGER" property="is_promote" />
+    </resultMap>	
+
+
+    <resultMap id="BaseResultMap" type="com.ai.entity.Goods">
+    <id column="goods_id" jdbcType="INTEGER" property="goodsId" />
+    <result column="cat_id" jdbcType="INTEGER" property="catId" />
+    <result column="vendor_id" jdbcType="INTEGER" property="vendorId" />
+    <result column="goods_sn" jdbcType="VARCHAR" property="goodsSn" />
+    <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+    <result column="goods_ename" jdbcType="VARCHAR" property="goodsEname" />
+    <result column="goods_name_style" jdbcType="VARCHAR" property="goodsNameStyle" />
+    <result column="click_count" jdbcType="INTEGER" property="clickCount" />
+    <result column="brand_id" jdbcType="INTEGER" property="brandId" />
+    <result column="provider_name" jdbcType="VARCHAR" property="providerName" />
+    <result column="goods_number" jdbcType="INTEGER" property="goodsNumber" />
+    <result column="margin_storage" jdbcType="INTEGER" property="marginStorage" />
+    <result column="goods_weight" jdbcType="DECIMAL" property="goodsWeight" />
+    <result column="pieces_per_pack" jdbcType="VARCHAR" property="piecesPerPack" />
+    <result column="weight_unit" jdbcType="VARCHAR" property="weightUnit" />
+    <result column="cost" jdbcType="DECIMAL" property="cost" />
+    <result column="market_price" jdbcType="DECIMAL" property="marketPrice" />
+    <result column="shop_price" jdbcType="DECIMAL" property="shopPrice" />
+    <result column="promote_price" jdbcType="DECIMAL" property="promotePrice" />
+    <result column="promote_start_date" jdbcType="INTEGER" property="promoteStartDate" />
+    <result column="promote_end_date" jdbcType="INTEGER" property="promoteEndDate" />
+    <result column="promote_countdown" jdbcType="VARCHAR" property="promoteCountdown" />
+    <result column="promote_weekly" jdbcType="VARCHAR" property="promoteWeekly" />
+    <result column="warn_number" jdbcType="TINYINT" property="warnNumber" />
+    <result column="keywords" jdbcType="VARCHAR" property="keywords" />
+    <result column="goods_brief" jdbcType="VARCHAR" property="goodsBrief" />
+    <result column="goods_thumb" jdbcType="VARCHAR" property="goodsThumb" />
+    <result column="goods_img" jdbcType="VARCHAR" property="goodsImg" />
+    <result column="original_img" jdbcType="VARCHAR" property="originalImg" />
+    <result column="is_real" jdbcType="TINYINT" property="isReal" />
+    <result column="extension_code" jdbcType="VARCHAR" property="extensionCode" />
+    <result column="is_on_sale" jdbcType="BIT" property="isOnSale" />
+    <result column="is_alone_sale" jdbcType="BIT" property="isAloneSale" />
+    <result column="is_shipping" jdbcType="BIT" property="isShipping" />
+    <result column="integral" jdbcType="INTEGER" property="integral" />
+    <result column="add_time" jdbcType="INTEGER" property="addTime" />
+    <result column="sort_order" jdbcType="INTEGER" property="sortOrder" />
+    <result column="is_delete" jdbcType="BIT" property="isDelete" />
+    <result column="is_best" jdbcType="BIT" property="isBest" />
+    <result column="is_new" jdbcType="BIT" property="isNew" />
+    <result column="is_hot" jdbcType="BIT" property="isHot" />
+    <result column="is_promote" jdbcType="BIT" property="isPromote" />
+    <result column="bonus_type_id" jdbcType="TINYINT" property="bonusTypeId" />
+    <result column="last_update" jdbcType="INTEGER" property="lastUpdate" />
+    <result column="goods_type" jdbcType="INTEGER" property="goodsType" />
+    <result column="seller_note" jdbcType="VARCHAR" property="sellerNote" />
+    <result column="give_integral" jdbcType="INTEGER" property="giveIntegral" />
+    <result column="rank_integral" jdbcType="INTEGER" property="rankIntegral" />
+    <result column="suppliers_id" jdbcType="INTEGER" property="suppliersId" />
+    <result column="is_check" jdbcType="BIT" property="isCheck" />
+    <result column="changwei" jdbcType="VARCHAR" property="changwei" />
+    <result column="huowei" jdbcType="VARCHAR" property="huowei" />
+    <result column="zuhe_name" jdbcType="INTEGER" property="zuheName" />
+    <result column="mark_off_shelf" jdbcType="BIT" property="markOffShelf" />
+    <result column="is_limited" jdbcType="BIT" property="isLimited" />
+    <result column="limited_number" jdbcType="INTEGER" property="limitedNumber" />
+    <result column="limited_quantity" jdbcType="INTEGER" property="limitedQuantity" />
+    <result column="limited_once" jdbcType="INTEGER" property="limitedOnce" />
+  </resultMap>
+  
+  <resultMap id="ResultShowCategoryMap" type="com.ai.entity.CategoryForShow">
+    <result column="cat_id" jdbcType="INTEGER" property="cat_id" />
+    <result column="parent_id" jdbcType="INTEGER" property="parent_id" />
+    <result column="cat_name" jdbcType="VARCHAR" property="cat_name" />
+    <result column="cat_ename" jdbcType="VARCHAR" property="cat_ename" />
+    <result column="is_show" jdbcType="INTEGER" property="is_show" />
+    </resultMap>
+  
+  <resultMap id="BaseResult1Map" type="com.ai.parser.Goods">
+    <id column="goods_id" jdbcType="INTEGER" property="goodsId" />
+    <result column="item_number" jdbcType="VARCHAR" property="itemNumber" />
+    <result column="cat_id" jdbcType="INTEGER" property="catId" />
+    <result column="brand_id" jdbcType="INTEGER" property="brandId" />
+    <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+    <result column="goods_ename" jdbcType="VARCHAR" property="goodsEname" />
+    <result column="click_count" jdbcType="INTEGER" property="clickCount" />
+    <result column="goods_number" jdbcType="INTEGER" property="goodsNumber" />
+    <result column="shop_price" jdbcType="DECIMAL" property="shopPrice" />
+    <result column="promote_price" jdbcType="DECIMAL" property="promotePrice" />
+    <result column="first_add_time" jdbcType="INTEGER" property="firstAddTime" />
+    <result column="promote_start_date" jdbcType="INTEGER" property="promoteStartDate" />
+    <result column="promote_end_date" jdbcType="INTEGER" property="promoteEndDate" />
+    <result column="is_promote" jdbcType="BIT" property="isPromote" />
+    <result column="integral" jdbcType="INTEGER" property="integral" />
+    <result column="goods_img" jdbcType="VARCHAR" property="goodsImg" />
+    <result column="keywords" jdbcType="VARCHAR" property="keywords" />
+    <result column="goods_weight" jdbcType="DECIMAL" property="goodsWeight" />
+    <result column="brand_name" jdbcType="VARCHAR" property="brandName" />
+    <result column="give_integral" jdbcType="INTEGER" property="giveIntegral" />
+    <result column="weight_unit" jdbcType="VARCHAR" property="weightUnit" />
+    <result column="click_count" jdbcType="INTEGER" property="clickCount" />
+    <result column="add_time" jdbcType="INTEGER" property="addTime" />
+    <result column="goods_thumb" jdbcType="VARCHAR" property="goodsThumb" />
+    <result column="prefix_cn" jdbcType="VARCHAR" property="prefixCn" />
+    <result column="suffix_cn" jdbcType="VARCHAR" property="suffixCn" />
+    <result column="prefix_en" jdbcType="VARCHAR" property="prefixEn" />
+    <result column="suffix_en" jdbcType="VARCHAR" property="suffixEn" />
+    <result column="vendor_id" jdbcType="INTEGER" property="vendorId" />
+    <result column="is_on_sale" jdbcType="BIT" property="isOnSale" />
+    <result column="is_delete" jdbcType="BIT" property="isDelete" />
+    <result column="upc_code" jdbcType="VARCHAR" property="upcCode" />
+    <result column="tag_id" jdbcType="INTEGER" property="tagId" />
+    <result column="tag" jdbcType="VARCHAR" property="tag" />
+    <result column="tag_eng" jdbcType="VARCHAR" property="tagEng" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  
+ <resultMap id="BaseResult2Map" type="com.ai.parser.CatInfo">
+    <result column="cat_id" jdbcType="INTEGER" property="cat_id" />
+    <result column="cat_name" jdbcType="VARCHAR" property="cat_name" />
+    <result column="cat_ename" jdbcType="VARCHAR" property="cat_ename" />
+    <result column="parent_id" jdbcType="INTEGER" property="parent_id" />
+  </resultMap>
+  
+  <resultMap id="BaseResult3Map" type="com.ai.parser.BrandInfo">
+    <result column="brand_id" jdbcType="INTEGER" property="brand_id" />
+    <result column="brand_name" jdbcType="VARCHAR" property="brand_name" />
+    <result column="brand_ename" jdbcType="VARCHAR" property="brand_ename" />
+     <result column="alphabetic_index" jdbcType="VARCHAR" property="alphabetic_index" />
+  </resultMap>
+  <resultMap id="HotelResultMap" type="com.ai.entity.Hotel">
+    <id column="hotelId" jdbcType="INTEGER" property="hotelId" />
+    <result column="productId" jdbcType="INTEGER" property="productId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="name_zh" jdbcType="VARCHAR" property="name_zh" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="description_zh" jdbcType="VARCHAR" property="description_zh" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="zipcode" jdbcType="VARCHAR" property="zipcode" />
+    <result column="desPid" jdbcType="VARCHAR" property="desPid" />
+    <result column="desId" jdbcType="INTEGER" property="desId" />
+    <result column="hzone" jdbcType="VARCHAR" property="hzone" />
+    <result column="zoneCode" jdbcType="INTEGER" property="zoneCode" />
+    <result column="display" jdbcType="INTEGER" property="display" />
+    <result column="countryId" jdbcType="INTEGER" property="countryId" />
+    <result column="countryCode" jdbcType="VARCHAR" property="countryCode" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="latitude" jdbcType="DOUBLE" property="latitude" />
+    <result column="longitude" jdbcType="DOUBLE" property="longitude" />
+    <result column="rating" jdbcType="INTEGER" property="rating" />
+    <result column="category" jdbcType="VARCHAR" property="category" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="fax" jdbcType="VARCHAR" property="fax" />
+    <result column="minPrice" jdbcType="DOUBLE" property="minPrice" />   
+    <result column="maxPrice" jdbcType="VARCHAR" property="maxPrice" /> 
+    <result column="currency" jdbcType="VARCHAR" property="currency" />
+    <result column="provider" jdbcType="VARCHAR" property="provider" />
+    <result column="created_at" jdbcType="DATE" property="created_at" /> 
+    <result column="updated_at" jdbcType="DATE" property="updated_at" />
+</resultMap>
+  <resultMap id="ScenicResultMap" type="com.ai.entity.Scenic">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="name_zh" jdbcType="VARCHAR" property="name_zh" />
+    <result column="name_short" jdbcType="VARCHAR" property="name_short" />
+    <result column="name_full" jdbcType="VARCHAR" property="name_full" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="desId" jdbcType="INTEGER" property="desId" />
+    <result column="destination_name" jdbcType="VARCHAR" property="destination_name" />
+    <result column="destination_name_zh" jdbcType="VARCHAR" property="destination_name_zh" />
+    <result column="northeast_lat" jdbcType="DOUBLE" property="northeast_lat" />
+    <result column="northeast_lng" jdbcType="DOUBLE" property="northeast_lng" />
+    <result column="southwest_lat" jdbcType="DOUBLE" property="southwest_lat" />
+    <result column="southwest_lng" jdbcType="DOUBLE" property="southwest_lng" />
+    <result column="sequence" jdbcType="INTEGER" property="sequence" />
+</resultMap>
+  <sql id="Base_Column_List">
+    goods_id, cat_id,vendor_id, goods_sn, goods_name, goods_ename, goods_name_style, click_count, 
+    brand_id, provider_name, goods_number, margin_storage, goods_weight, pieces_per_pack, 
+    weight_unit, cost, market_price, shop_price, promote_price, promote_start_date, promote_end_date, 
+    promote_countdown, promote_weekly, warn_number, keywords, goods_brief, goods_thumb, 
+    goods_img, original_img, is_real, extension_code, is_on_sale, is_alone_sale, is_shipping, 
+    integral, add_time, sort_order, is_delete, is_best, is_new, is_hot, is_promote, bonus_type_id, 
+    last_update, goods_type, seller_note, give_integral, rank_integral, suppliers_id, 
+    is_check, changwei, huowei, zuhe_name, mark_off_shelf, is_limited, limited_number, 
+    limited_quantity, limited_once
+  </sql>
+
+    
+        
+    <select id="searchSuggestion" parameterType="Map" resultType="com.ai.entity.Suggestion">
+    	select *
+    	from xysc_suggestion as a
+    	where a.k= #{k} and a.v= #{v}
+  	</select>
+    
+    <insert id="insertSuggestion" parameterType="com.ai.entity.Suggestion">
+		insert into xysc_suggestion 
+		(k,
+		 v,
+		 krank,
+		 kdemo,
+		 vrank,
+		 vdemo
+		)
+		values 
+		(#{k,jdbcType=VARCHAR},
+		 #{v,jdbcType=VARCHAR},
+	     #{krank,jdbcType=DECIMAL},
+	     #{kdemo,jdbcType=DECIMAL},
+	     #{vrank,jdbcType=DECIMAL},
+	     #{vdemo,jdbcType=DECIMAL}
+		)
+	</insert>
+
+        
+    <update id="updateSuggestion" parameterType="com.ai.entity.Suggestion">
+    	update xysc_suggestion
+    	<set>
+       	 	krank = #{krank},
+        	kdemo = #{kdemo},
+       		vrank = #{vrank},
+        	vdemo = #{vdemo},
+    	</set>
+      	where k = #{k} and v=#{v}
+  	</update> 
+    
+    <select id="loadSuggestion" parameterType="Map" resultType="com.ai.entity.Suggestion">
+    	select *
+    	from xysc_suggestion
+  	</select>
+    
+    <select id="getAllName" parameterType="Map" resultMap="BaseResultMap">
+    	select a.goods_name,a.goods_ename
+    	from xysc_goods as a
+  	</select>
+  	
+    <select id="selectGoodsNum" resultType="int">
+    	select count(1)    	 	   
+    	from xysc_goods
+  	</select>  
+    <select id="getAllHotel" parameterType="Map" resultMap="HotelResultMap">
+    	select a.*,b.countryCode from hotel a left join country b on a.countryId=b.countryId where a.display=2 or a.display=9 limit #{start},#{leng}
+  	</select>  
+    <select id="selectHotelNum" resultType="int">
+    	select count(1)    	 	   
+    	from hotel a where a.display=2 or a.display=9
+  	</select>    		  
+    <select id="getAllScenic" parameterType="Map" resultMap="ScenicResultMap">
+    	select a.* from scenic_area a where a.northeast_lat is not null limit #{start},#{leng}
+  	</select>  
+    <select id="selectScenicNum" resultType="int">
+    	select count(1)    	 	   
+    	from scenic_area a where a.northeast_lat is not null
+  	</select>    	  	
+     	
+    <select id="selectAllName" parameterType="Map" resultMap="BaseResult1Map">
+    	select a.weight_unit,
+    	  a.goods_id,
+    	   a.goods_ename,
+    	    a.goods_name,
+    	     b.cat_id,
+    	      a.brand_id,
+    	       a.click_count,
+    	        a.first_add_time,
+    	        a.promote_start_date,
+    	        a.promote_end_date,
+    	         a.is_promote,
+    	          a.goods_number,
+    	           a.shop_price,
+    	            a.promote_price,
+    	             a.give_integral,
+    	              a.goods_img ,
+    	              a.keywords,
+    	               a.goods_weight,
+    	                a.goods_thumb ,
+    	                a.keywords as brand_name,
+    	                a.prefix_cn ,
+    	                a.suffix_cn ,
+    	                a.prefix_en ,
+    	                a.suffix_en ,
+    	                a.vendor_id , 
+    	                a.is_delete ,
+    	                a.is_on_sale,
+    	                c.item_number,
+    	                c.upc_code,
+    	                e.tag_id,
+    	                e.tag,
+    	                e.tag_eng,
+    	                e.status
+    	from xysc_goods as a
+    	inner join xysc_goods_cat as b
+    	on a.goods_id = b.goods_id
+    	left join Yamibuy_IM.im_item c
+    	on a.goods_id = c.goods_id
+    	left join Yamibuy_IM.im_item_tag d
+    	on c.item_number = d.item_number
+    	left join Yamibuy_IM.im_tag e
+    	on d.tag_id = e.tag_id
+    	WHERE a.is_delete != 1
+    	limit #{start},#{leng}
+  	</select>
+    
+    <select id="getCatInfo" parameterType="Map" resultMap="BaseResult2Map">
+    	select a.cat_id, a.cat_name, a.cat_ename, a.parent_id
+    	from xysc_category as a
+    	where a.cat_id= #{cat_id}
+  	</select>
+  	
+     <select id="getCats" parameterType="Map" resultMap="BaseResult2Map">
+    	select a.cat_id, a.cat_name, a.cat_ename, a.parent_id
+    	from xysc_category as a
+  	</select>
+    
+    <select id="getBrands" parameterType="Map" resultMap="BaseResult3Map">
+    	select a.brand_id, a.brand_name, a.brand_ename, a.alphabetic_index
+    	from xysc_brand as a
+  	</select>
+    
+    
+    <select id="getBrandInfo" parameterType="Map" resultMap="BaseResult3Map">
+    	select a.brand_id, a.brand_name, a.brand_ename, a.alphabetic_index
+    	from xysc_brand as a
+    	where a.brand_id= #{brand_id}
+  	</select>
+    
+    <select id="selectShowCategory" resultMap="ResultShowCategoryMap">
+        select cat_id,cat_name,cat_ename,parent_id,is_show from xysc_category
+    </select>
+    
+</mapper>

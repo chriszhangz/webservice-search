@@ -1,0 +1,49 @@
+{
+  "explain":false,
+  "query": {
+    "function_score": {
+      "query": {
+        "multi_match": {
+          "query": "MATCHXXX",
+          "fields": [
+            "name^2",
+            "name_zh^2",
+            "destination_name",
+            "destination_name_zh",
+            "name_zh.pinyin"
+          ]
+        }
+      },
+    "boost_mode":"sum"
+    }
+  },
+  "post_filter": { 
+    "bool" : {
+      "must_not" : [
+        {"term": { "type": "pnlAirport" }}
+        ]
+    }
+  },   
+  "sort": {
+    "_score": {
+      "order": "desc"
+    }
+  },
+  "size": 3,
+  "min_score": 0,
+  "highlight": {
+    "pre_tags": [
+      "<strong>",
+      "<strong>"
+    ],
+    "post_tags": [
+      "</strong>",
+      "</strong>"
+    ],
+    "fields": {
+      "name": {},
+      "dname_zh": {},
+      "name_zh.pinyin": {}
+    }
+  }
+}
