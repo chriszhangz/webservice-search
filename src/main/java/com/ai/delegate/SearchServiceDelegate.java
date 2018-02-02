@@ -441,7 +441,7 @@ public class SearchServiceDelegate {
 			List<Destination_new> goods = goodsService.selectAllDestinations(m * 4000, 4000);
 			for (int i = 0; i < goods.size(); i++) {
 
-				Index index = new Index.Builder(goods.get(i)).index("usitrip_search_v2").type(RESULT_TYPE).build();
+				Index index = new Index.Builder(goods.get(i)).index("usitrip_search_v3").type(RESULT_TYPE).build();
 				bulkBuilder.addAction(index);
 
 			}
@@ -497,7 +497,7 @@ public class SearchServiceDelegate {
 		}
 
 	}	
-	public void importHotelInfo() throws Exception {
+	public void importHotelInfo(String indexName) throws Exception {
 		// String indexName = "yami_search";
 		// String typeName = "goods_info";
 		/*
@@ -521,7 +521,7 @@ public class SearchServiceDelegate {
 			List<Hotel> goods = goodsService.getAllHotel(m * 2000, 2000);
 			for (int i = 0; i < goods.size(); i++) {
 
-				Index index = new Index.Builder(goods.get(i)).index("hotel_search_v2").type("hotel_info").build();
+				Index index = new Index.Builder(goods.get(i)).index(indexName).type("hotel_info").build();
 				bulkBuilder.addAction(index);
 
 			}
@@ -763,7 +763,7 @@ public class SearchServiceDelegate {
 		}
 		// client.shutdownClient();
 	}
-	public Map<String, Object> searchNameResults(String input)
+	public Map<String, Object> searchNameResults(String input,String usitrip_search,String hotel_search,String scenic_search)
 			throws Exception {
 		Map<String, Object> end = new HashMap<String, Object>();
 		if(input == null){
@@ -788,7 +788,7 @@ public class SearchServiceDelegate {
 		List<Object> result = new ArrayList<Object>();
 		URL url = SearchServiceDelegate.class.getResource("elastic-searchDestResult.json");
 		searchJson = Resources.toString(url, Charsets.UTF_8).replace("MATCHXXX", input);
-		Search.Builder searchBuilder = new Search.Builder(searchJson).addIndex("usitrip_search")
+		Search.Builder searchBuilder = new Search.Builder(searchJson).addIndex(usitrip_search)
 				.addType("dest_info");
 		SearchResult sresult = client.execute(searchBuilder.build());
 		List<SearchResult.Hit<Destination_new, Void>> hits = sresult.getHits(Destination_new.class);
@@ -826,7 +826,7 @@ public class SearchServiceDelegate {
 
 		URL url2 = SearchServiceDelegate.class.getResource("elastic-searchHotelResult.json");
 		searchJson = Resources.toString(url2, Charsets.UTF_8).replace("MATCHXXX", input);
-		Search.Builder searchBuilder2 = new Search.Builder(searchJson).addIndex("hotel_search")
+		Search.Builder searchBuilder2 = new Search.Builder(searchJson).addIndex(hotel_search)
 				.addType("hotel_info");
 		SearchResult sresult2 = client.execute(searchBuilder2.build());
 		List<SearchResult.Hit<Hotel, Void>> hits2 = sresult2.getHits(Hotel.class);
@@ -871,7 +871,7 @@ public class SearchServiceDelegate {
 		}
 		URL url3 = SearchServiceDelegate.class.getResource("elastic-searchScenicResult.json");
 		searchJson = Resources.toString(url3, Charsets.UTF_8).replace("MATCHXXX", input);
-		Search.Builder searchBuilder3 = new Search.Builder(searchJson).addIndex("scenic_search")
+		Search.Builder searchBuilder3 = new Search.Builder(searchJson).addIndex(scenic_search)
 				.addType("scenic_info");
 		SearchResult sresult3 = client.execute(searchBuilder3.build());
 		List<SearchResult.Hit<Scenic, Void>> hits3 = sresult3.getHits(Scenic.class);
@@ -909,7 +909,7 @@ public class SearchServiceDelegate {
 		}
 		URL url4 = SearchServiceDelegate.class.getResource("elastic-searchAirportResult.json");
 		searchJson = Resources.toString(url4, Charsets.UTF_8).replace("MATCHXXX", input);
-		Search.Builder searchBuilder4 = new Search.Builder(searchJson).addIndex("scenic_search")
+		Search.Builder searchBuilder4 = new Search.Builder(searchJson).addIndex(scenic_search)
 				.addType("scenic_info");
 		SearchResult sresult4 = client.execute(searchBuilder4.build());
 		List<SearchResult.Hit<Scenic, Void>> hits4 = sresult4.getHits(Scenic.class);

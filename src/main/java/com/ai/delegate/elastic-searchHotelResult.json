@@ -1,10 +1,19 @@
 {  
 "query":{
+  "function_score": {
+"query":{
 "multi_match" : {
          "query":"MATCHXXX",
 "fields": [  "name^2","name_zh" ]
   }
    },
+"boost_mode":"sum",
+   "functions": [      {
+     "script_score": {
+        "script": "return doc['countryId'].value == 181 ? 1.5 : 1.0"
+      }}]
+    }
+   },   
    "sort": {
    	"_score": { "order": "desc" }
    },

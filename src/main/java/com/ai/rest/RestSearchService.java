@@ -89,9 +89,9 @@ public class RestSearchService {
 	@GET
 	@Path("/importHotelInfo")
 	@Produces("application/json;charset=utf-8")
-	public Response importHotelInfo() throws Exception {
+	public Response importHotelInfo(@QueryParam("indexName") String IndexName) throws Exception {
 		Map<String, Object> result;
-		searchServicedelegate.importHotelInfo();
+		searchServicedelegate.importHotelInfo(IndexName);
 		return Response.status(Status.OK).entity("OK").build();
 	}
 	
@@ -283,9 +283,19 @@ public class RestSearchService {
 	public Response searchNameResults(@QueryParam("input") String input) throws Exception {
 		Map<String, Object> result;
 
-		result = searchServicedelegate.searchNameResults(input);
+		result = searchServicedelegate.searchNameResults(input,"usitrip_search","hotel_search","scenic_search");
 		return Response.status(Status.OK).entity(result).build();
-	}		
+	}	
+	
+	@GET
+	@Path("/searchNameResultsTest")
+	@Produces("application/json;charset=utf-8")
+	public Response searchNameResultsTest(@QueryParam("input") String input) throws Exception {
+		Map<String, Object> result;
+
+		result = searchServicedelegate.searchNameResults(input,"usitrip_search_test","hotel_search_test","scenic_search_test");
+		return Response.status(Status.OK).entity(result).build();
+	}
 	/*@GET
 	@Path("/makeSuggestions")
 	@Produces("application/json;charset=utf-8")
